@@ -10,19 +10,23 @@ public class SocketServer {
     public void runServer() { //create new server socket
         try {
             serverSocket = new ServerSocket(port);
+            while (clients!=5) {//searching for connections
+                try{
+                    Socket clientSocket = serverSocket.accept();//every time the ServerSocket() accept connection form the client
+                    RunnableServer r = new RunnableServer(clientSocket);//this is storing in clientSocket
+                    new Thread(r).start();
+                    clients++;
+                    if(clients == 5){
+                        serverSocket.close();
+                    }
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }//end 2. try }
+            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }//end 1. try
 
-        while (clients!=5)//searching for connections
-            try {
-                Socket clientSocket = serverSocket.accept();//every time the ServerSocket() accept connection form the client
-                RunnableServer r = new RunnableServer(clientSocket);//this is storing in clientSocket
-                new Thread(r).start();
-                clients++;
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }//end 2. try
 
     }// end run method
 }
