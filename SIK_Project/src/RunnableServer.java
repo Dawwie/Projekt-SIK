@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static java.lang.Thread.sleep;
+
 
 //this class pass the clientsocket() information
 //and then RunnableServer know how to communicate with the client
@@ -14,7 +16,7 @@ public class RunnableServer<players> implements Runnable{
     protected Socket clientSocket;
     BufferedReader in = null;
     PrintWriter out = null;
-    public static Player newPlayer = new Player();
+    Player newPlayer = new Player();
 
 
     public RunnableServer(Socket clientSocket){//there we store the information about clientsocket
@@ -37,14 +39,25 @@ public class RunnableServer<players> implements Runnable{
         }catch(IOException e){
             e.printStackTrace();
         }//end 2. try
-        while(true){
-            try {
-                out.println("START " + newPlayer.getId() + " " + SocketServer.random);
-            } catch(Exception e){
-                e.printStackTrace();
 
+        while(!SocketServer.allPlayers) {
+            try {
+                sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
+        try {
+            out.println("START " + newPlayer.getId() + " " + SocketServer.random);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        try{
+            out.println("Plansza " + " X" + " Y" + " ID" + " CUBES");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }// end run()
+
 }
