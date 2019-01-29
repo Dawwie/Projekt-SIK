@@ -39,10 +39,10 @@ public class RunnableServer<players> implements Runnable{
         }//end 2. try
         while(true){
             try {
-                if(SocketServer.allPlayers)
                 out.println("START " + newPlayer.getId() + " " + SocketServer.random);
             } catch(Exception e){
                 e.printStackTrace();
+
             }
         }
 
