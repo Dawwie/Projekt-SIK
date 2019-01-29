@@ -38,10 +38,14 @@ public class Client {
         }catch(Exception e){
             e.printStackTrace();
         }//end 2. try
-        while(!SocketServer.allPlayers){}
+        while(SocketServer.allPlayers){}
 
         try {
-            System.out.println(in.readLine());
+            string = in.readLine();
+                System.out.println(string);
+                if(SocketServer.allPlayers){
+                    System.out.println(string);
+                }
         } catch (Exception e) {
             e.printStackTrace();
         }//end 3. try
