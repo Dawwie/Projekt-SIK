@@ -30,24 +30,27 @@ public class Client {
         }catch(IOException e){
             e.printStackTrace();
         }//end 1. try
-
         //logging
         try{
             out.println("LOGIN Player " + ThreadLocalRandom.current().nextInt(100, 300) + " is connected");
-            System.out.println(in.readLine());
+            while(true){
+                string = in.readLine();
+                System.out.println(string);
+                if(!string.startsWith("START")){
+                    string = in.readLine();
+                    System.out.println(string);
+                }
+                if(!string.startsWith("Plansza")){
+                    string = in.readLine();
+                    for(int i = 0; i < 25;i++){
+                        System.out.println(string);
+                    }
+                }
+            }
+
         }catch(Exception e){
             e.printStackTrace();
         }//end 2. try
-        while(SocketServer.allPlayers){}
 
-        try {
-            string = in.readLine();
-                System.out.println(string);
-                if(SocketServer.allPlayers){
-                    System.out.println(string);
-                }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }//end 3. try
     }//end main
 }//end class
