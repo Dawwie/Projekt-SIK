@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.ThreadLocalRandom;
@@ -11,7 +12,7 @@ public class Client {
         //connection client with the server
         String hostName = "127.0.0.1";
         int port = 44444;
-        String string;
+        String string= "";
         Socket clientSocket;
         PrintWriter out = null;
         BufferedReader in = null;
@@ -32,27 +33,17 @@ public class Client {
 
         //logging
         try{
-            string = "Gracz" + ThreadLocalRandom.current().nextInt(100, 300) + " został połączony";
-            out.println(string);
+            out.println("LOGIN Player " + ThreadLocalRandom.current().nextInt(100, 300) + " is connected");
+            System.out.println(in.readLine());
         }catch(Exception e){
             e.printStackTrace();
         }//end 2. try
+        while(!SocketServer.allPlayers){}
 
-        //connection message
-        try{
+        try {
             System.out.println(in.readLine());
-        }catch(IOException e){
+        } catch (Exception e) {
             e.printStackTrace();
         }//end 3. try
-
-        //reading from the server
-        try{
-            string = in.readLine();
-            while(true){
-               System.out.println(string);
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
     }//end main
 }//end class
