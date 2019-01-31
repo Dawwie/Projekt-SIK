@@ -48,7 +48,7 @@ public class RunnableServer<players> implements Runnable{
                 e.printStackTrace();
             }
         }
-        //zrobic id i kostki
+
         try {
             out.println("START " + newPlayer.getId() + " " + SocketServer.random);
         } catch(Exception e){
@@ -58,7 +58,7 @@ public class RunnableServer<players> implements Runnable{
             board.WriteTable();
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
-                    out.println("PLANSZA " + (i + 1) + " " + (j + 1) + " " + board.playerId[i][j] + " " + board.cubes[i][j]);
+                    out.println("PLANSZA " + (i+1) + " " + (j+1) + " " + board.playerId[i][j] + " " + board.cubes[i][j]);
                 }
             }
         }catch(Exception e){
