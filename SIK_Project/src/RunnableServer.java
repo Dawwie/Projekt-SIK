@@ -29,17 +29,17 @@ public class RunnableServer<players> implements Runnable{
         }catch(IOException e){
             e.printStackTrace();
         }//end 1. try
+
         try{
             System.out.println(in.readLine() + "\n");
             newPlayer.setId(SocketServer.clients - 1);
             newPlayer.setScore(0);
             newPlayer.setPoints(0);
             SocketServer.players.put(newPlayer.getId(),newPlayer);
-            out.println("CONNECTED");
+            out.println("Połączono z serwerem");
         }catch(IOException e){
             e.printStackTrace();
         }//end 2. try
-
         while(!SocketServer.allPlayers) {
             try {
                 sleep(1);
@@ -47,14 +47,14 @@ public class RunnableServer<players> implements Runnable{
                 e.printStackTrace();
             }
         }
-
+        //zrobic id i kostki
         try {
             out.println("START " + newPlayer.getId() + " " + SocketServer.random);
         } catch(Exception e){
             e.printStackTrace();
         }
         try{
-            out.println("Plansza " + " X" + " Y" + " ID" + " CUBES");
+            out.println("-------------------------");
         }catch(Exception e){
             e.printStackTrace();
         }
