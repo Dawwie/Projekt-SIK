@@ -37,17 +37,20 @@ public class Client {
             while(true){
                 string = in.readLine();
                 System.out.println(string);
-                if(!string.startsWith("START")){
+                if(string.startsWith("START")){
                     string = in.readLine();
                     System.out.println(string);
                 }
-                if(!string.startsWith("PLANSZA")){
+                if(string.startsWith("PLANSZA")){
                     string = in.readLine();
                     System.out.println(string);
-                    String[] parts = string.split("-");
-                    board.playerId[Integer.parseInt(parts[1])][Integer.parseInt(parts[2])] = Integer.parseInt(parts[3]);
-                    board.cubes[Integer.parseInt(parts[1])][Integer.parseInt(parts[2])] = Integer.parseInt(parts[4]);
+                    String[] parts = string.split(" ");
+                    board.playerId[Integer.parseInt(parts[1])-1][Integer.parseInt(parts[2])-1] = Integer.parseInt(parts[3]);
+                    board.cubes[Integer.parseInt(parts[1])-1][Integer.parseInt(parts[2])-1] = Integer.parseInt(parts[4]);
+
+
                 }
+
             }
 
         }catch(Exception e){
