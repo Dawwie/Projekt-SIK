@@ -4,12 +4,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import static java.lang.System.*;
 
 public class Board {
-    private int cube;
-    private int[][] playerId = new int[5][5];
+    public int[][] playerId = new int[5][5];
+    public int[][] cubes = new int[5][5];
     private int random=ThreadLocalRandom.current().nextInt(0, 5);
     private int random2=ThreadLocalRandom.current().nextInt(0, 5);
+    private int randomCubes = ThreadLocalRandom.current().nextInt(1, 5);
     public Board() { }
     Player newPlayer = new Player();
+
 
     public void WriteTable() {
         for (int i = 0; i < 5; i++) {
@@ -34,10 +36,23 @@ public class Board {
                 }
             }
         }
+
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.println("PLANSZA " + (i + 1) + " " + (j + 1) + " " + playerId[i][j]);
+                cubes[i][j] = playerId[i][j];
             }
         }
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if(cubes[i][j] != 0){
+                    cubes[i][j] = 2;
+                }else{
+                    cubes[i][j] = randomCubes;
+                    randomCubes = ThreadLocalRandom.current().nextInt(1, 5);
+                }
+            }
+        }
+
     }
 }

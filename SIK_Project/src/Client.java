@@ -17,7 +17,7 @@ public class Client {
         PrintWriter out = null;
         BufferedReader in = null;
         InputStreamReader ir;
-        Board board = new Board();
+        ClientBoard board = new ClientBoard();
         try{
             clientSocket = new Socket(hostName, port);
             //Create our IO streams
@@ -41,8 +41,12 @@ public class Client {
                     string = in.readLine();
                     System.out.println(string);
                 }
-                if(!string.startsWith("-------------------------")){
-                    board.WriteTable();
+                if(!string.startsWith("PLANSZA")){
+                    string = in.readLine();
+                    System.out.println(string);
+                    String[] parts = string.split("-");
+                    board.playerId[Integer.parseInt(parts[1])][Integer.parseInt(parts[2])] = Integer.parseInt(parts[3]);
+                    board.cubes[Integer.parseInt(parts[1])][Integer.parseInt(parts[2])] = Integer.parseInt(parts[4]);
                 }
             }
 

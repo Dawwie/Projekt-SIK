@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static java.lang.System.out;
 import static java.lang.Thread.sleep;
 
 
@@ -17,7 +18,7 @@ public class RunnableServer<players> implements Runnable{
     BufferedReader in = null;
     PrintWriter out = null;
     Player newPlayer = new Player();
-
+    Board board = new Board();
 
     public RunnableServer(Socket clientSocket){//there we store the information about clientsocket
         this.clientSocket = clientSocket;
@@ -54,7 +55,12 @@ public class RunnableServer<players> implements Runnable{
             e.printStackTrace();
         }
         try{
-            out.println("-------------------------");
+            board.WriteTable();
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    out.println("PLANSZA " + (i + 1) + " " + (j + 1) + " " + board.playerId[i][j] + " " + board.cubes[i][j]);
+                }
+            }
         }catch(Exception e){
             e.printStackTrace();
         }
