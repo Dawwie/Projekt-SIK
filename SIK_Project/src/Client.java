@@ -17,7 +17,7 @@ public class Client {
         PrintWriter out = null;
         BufferedReader in = null;
         InputStreamReader ir;
-
+        Board board = new Board();
         try{
             clientSocket = new Socket(hostName, port);
             //Create our IO streams
@@ -31,8 +31,9 @@ public class Client {
             e.printStackTrace();
         }//end 1. try
         //logging
+
         try{
-            out.println("LOGIN Player " + ThreadLocalRandom.current().nextInt(100, 300) + " is connected");
+            out.println("LOGIN Player" + ThreadLocalRandom.current().nextInt(100, 300) + " is connected");
             while(true){
                 string = in.readLine();
                 System.out.println(string);
@@ -40,11 +41,8 @@ public class Client {
                     string = in.readLine();
                     System.out.println(string);
                 }
-                if(!string.startsWith("Plansza")){
-                    string = in.readLine();
-                    for(int i = 0; i < 25;i++){
-                        System.out.println(string);
-                    }
+                if(!string.startsWith("-------------------------")){
+                    board.WriteTable();
                 }
             }
 
