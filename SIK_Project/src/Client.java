@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.ThreadLocalRandom;
@@ -11,12 +12,12 @@ public class Client {
         //connection client with the server
         String hostName = "127.0.0.1";
         int port = 44444;
-        String string;
+        String string= "";
         Socket clientSocket;
         PrintWriter out = null;
         BufferedReader in = null;
         InputStreamReader ir;
-
+        Board board = new Board();
         try{
             clientSocket = new Socket(hostName, port);
             //Create our IO streams
@@ -29,30 +30,25 @@ public class Client {
         }catch(IOException e){
             e.printStackTrace();
         }//end 1. try
-
         //logging
+
         try{
-            string = "Gracz" + ThreadLocalRandom.current().nextInt(100, 300) + " został połączony";
-            out.println(string);
+            out.println("LOGIN Player" + ThreadLocalRandom.current().nextInt(100, 300) + " is connected");
+            while(true){
+                string = in.readLine();
+                System.out.println(string);
+                if(!string.startsWith("START")){
+                    string = in.readLine();
+                    System.out.println(string);
+                }
+                if(!string.startsWith("-------------------------")){
+                    board.WriteTable();
+                }
+            }
+
         }catch(Exception e){
             e.printStackTrace();
         }//end 2. try
 
-        //connection message
-        try{
-            System.out.println(in.readLine());
-        }catch(IOException e){
-            e.printStackTrace();
-        }//end 3. try
-
-        //reading from the server
-        try{
-            string = in.readLine();
-            while(true){
-               System.out.println(string);
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
     }//end main
 }//end class
