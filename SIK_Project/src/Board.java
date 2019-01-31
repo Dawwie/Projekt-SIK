@@ -8,7 +8,8 @@ public class Board {
     public int[][] cubes = new int[5][5];
     private int random=ThreadLocalRandom.current().nextInt(0, 5);
     private int random2=ThreadLocalRandom.current().nextInt(0, 5);
-    private int randomCubes = ThreadLocalRandom.current().nextInt(1, 5);
+    private int randomCubes = ThreadLocalRandom.current().nextInt(1, 6);
+    private int check = 0;
     public Board() { }
     Player newPlayer = new Player();
 
@@ -47,12 +48,16 @@ public class Board {
             for (int j = 0; j < 5; j++) {
                 if(cubes[i][j] != 0){
                     cubes[i][j] = 2;
-                }else{
-                    cubes[i][j] = randomCubes;
-                    randomCubes = ThreadLocalRandom.current().nextInt(1, 5);
                 }
             }
         }
-
+        for(int k = 0 ; k < 5; k++){
+            while(cubes[random][random2]!=0){
+                random = ThreadLocalRandom.current().nextInt(0, 5);
+                random2 = ThreadLocalRandom.current().nextInt(0, 5);
+            }
+            cubes[random][random2] = randomCubes;
+            randomCubes = ThreadLocalRandom.current().nextInt(1, 6);
+        }
     }
 }
